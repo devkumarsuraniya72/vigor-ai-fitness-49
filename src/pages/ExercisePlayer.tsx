@@ -68,25 +68,29 @@ export default function ExercisePlayer() {
   };
 
   const generateExerciseImages = async () => {
-    const images: Record<string, string> = {};
-    
     for (const exercise of exercises) {
       if (!exerciseImages[exercise.id]) {
         try {
-          const response = await supabase.functions.invoke('generate-exercise-image', {
+          const { data, error } = await supabase.functions.invoke('generate-exercise-image', {
             body: { exerciseName: exercise.name }
           });
 
-          if (response.data?.imageUrl) {
-            images[exercise.id] = response.data.imageUrl;
+          if (error) {
+            console.error('Error generating image:', error);
+            continue;
+          }
+
+          if (data?.imageUrl) {
+            setExerciseImages(prev => ({ 
+              ...prev, 
+              [exercise.id]: data.imageUrl 
+            }));
           }
         } catch (error) {
-          console.error('Failed to generate image for', exercise.name);
+          console.error('Failed to generate image for', exercise.name, error);
         }
       }
     }
-
-    setExerciseImages(prev => ({ ...prev, ...images }));
   };
 
   const handleTimerEnd = () => {
