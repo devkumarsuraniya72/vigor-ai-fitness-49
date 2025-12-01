@@ -77,6 +77,19 @@ export default function ExercisePlayer() {
 
           if (error) {
             console.error('Error generating image:', error);
+            toast.error(`Failed to generate image for ${exercise.name}`);
+            continue;
+          }
+
+          if (data?.error) {
+            console.error('API error:', data.error);
+            if (data.error.includes('Rate limit')) {
+              toast.error('AI rate limit reached. Please wait a moment.');
+            } else if (data.error.includes('Payment required')) {
+              toast.error('AI credits needed. Please add credits to continue.');
+            } else {
+              toast.error(`Image generation failed: ${data.error}`);
+            }
             continue;
           }
 
@@ -88,6 +101,7 @@ export default function ExercisePlayer() {
           }
         } catch (error) {
           console.error('Failed to generate image for', exercise.name, error);
+          toast.error(`Failed to generate image for ${exercise.name}`);
         }
       }
     }
