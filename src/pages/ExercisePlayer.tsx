@@ -19,17 +19,10 @@ export default function ExercisePlayer() {
   const [timeLeft, setTimeLeft] = useState(3);
   const [isPaused, setIsPaused] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [exerciseImages, setExerciseImages] = useState<Record<string, string>>({});
 
   useEffect(() => {
     loadDayExercises();
   }, [dayNumber]);
-
-  useEffect(() => {
-    if (exercises.length > 0 && !loading) {
-      generateExerciseImages();
-    }
-  }, [exercises, loading]);
 
   useEffect(() => {
     if (isPaused || loading) return;
@@ -67,45 +60,6 @@ export default function ExercisePlayer() {
     }
   };
 
-  const generateExerciseImages = async () => {
-    for (const exercise of exercises) {
-      if (!exerciseImages[exercise.id]) {
-        try {
-          const { data, error } = await supabase.functions.invoke('generate-exercise-image', {
-            body: { exerciseName: exercise.name }
-          });
-
-          if (error) {
-            console.error('Error generating image:', error);
-            toast.error(`Failed to generate image for ${exercise.name}`);
-            continue;
-          }
-
-          if (data?.error) {
-            console.error('API error:', data.error);
-            if (data.error.includes('Rate limit')) {
-              toast.error('AI rate limit reached. Please wait a moment.');
-            } else if (data.error.includes('Payment required')) {
-              toast.error('AI credits needed. Please add credits to continue.');
-            } else {
-              toast.error(`Image generation failed: ${data.error}`);
-            }
-            continue;
-          }
-
-          if (data?.imageUrl) {
-            setExerciseImages(prev => ({ 
-              ...prev, 
-              [exercise.id]: data.imageUrl 
-            }));
-          }
-        } catch (error) {
-          console.error('Failed to generate image for', exercise.name, error);
-          toast.error(`Failed to generate image for ${exercise.name}`);
-        }
-      }
-    }
-  };
 
   const handleTimerEnd = () => {
     if (state === 'countdown') {
@@ -262,22 +216,13 @@ export default function ExercisePlayer() {
               className="w-full max-w-4xl"
             >
               {/* Exercise Image */}
-              {exerciseImages[currentExercise.id] ? (
-                <div className="mb-8 overflow-hidden rounded-3xl border-4 border-primary/30">
-                  <img
-                    src={exerciseImages[currentExercise.id]}
-                    alt={currentExercise.name}
-                    className="w-full h-96 object-cover"
-                  />
+              <div className="mb-8 flex h-96 items-center justify-center rounded-3xl border-4 border-primary/30 bg-gradient-to-br from-primary/20 to-secondary/20">
+                <div className="text-center">
+                  <div className="text-8xl mb-4">💪</div>
+                  <p className="text-2xl font-bold text-foreground">{currentExercise.name}</p>
+                  <p className="text-muted-foreground mt-2">{currentExercise.difficulty}</p>
                 </div>
-              ) : (
-                <div className="mb-8 flex h-96 items-center justify-center rounded-3xl border-4 border-primary/30 bg-gradient-to-br from-primary/20 to-secondary/20">
-                  <div className="text-center">
-                    <div className="mb-4 h-16 w-16 mx-auto animate-spin rounded-full border-4 border-primary border-t-transparent" />
-                    <p className="text-muted-foreground">Generating exercise image...</p>
-                  </div>
-                </div>
-              )}
+              </div>
 
               {/* Exercise Info */}
               <div className="mb-8 text-center">
