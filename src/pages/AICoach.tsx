@@ -42,6 +42,16 @@ export default function AICoach() {
 
       if (error) throw error;
 
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
+
+      if (!data?.message) {
+        toast.error('No response from AI coach');
+        return;
+      }
+
       const assistantMessage: Message = {
         role: 'assistant',
         content: data.message,
