@@ -43,7 +43,13 @@ export default function AICoach() {
       if (error) throw error;
 
       if (data?.error) {
-        toast.error(data.error);
+        const errorMessage: Message = {
+          role: 'assistant',
+          content: data.error.includes('credits') 
+            ? "I'm currently unavailable because AI credits have run out. Please add credits to your Lovable workspace (Settings → Workspace → Usage) to continue chatting with me!"
+            : data.error,
+        };
+        setMessages((prev) => [...prev, errorMessage]);
         return;
       }
 
