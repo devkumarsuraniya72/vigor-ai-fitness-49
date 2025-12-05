@@ -40,13 +40,28 @@ export default function AICoach() {
         body: { messages: [...messages, userMessage] },
       });
 
-      if (error) throw error;
-
-      if (data?.error) {
+      // Handle edge function errors (including 402)
+      if (error) {
+        const errorString = error.message || String(error);
+        const isCreditsError = errorString.includes('402') || errorString.includes('credits') || errorString.includes('Payment');
+        
         const errorMessage: Message = {
           role: 'assistant',
-          content: data.error.includes('credits') 
-            ? "I'm currently unavailable because AI credits have run out. Please add credits to your Lovable workspace (Settings → Workspace → Usage) to continue chatting with me!"
+          content: isCreditsError
+            ? "I'm currently unavailable because AI credits have run out. Please add credits to your Lovable workspace (Settings → Workspace → Usage) to continue chatting with me! 💪"
+            : "Sorry, I'm having trouble connecting right now. Please try again later.",
+        };
+        setMessages((prev) => [...prev, errorMessage]);
+        return;
+      }
+
+      // Handle application-level errors from the response
+      if (data?.error) {
+        const isCreditsError = data.error.includes('credits') || data.error.includes('Payment');
+        const errorMessage: Message = {
+          role: 'assistant',
+          content: isCreditsError
+            ? "I'm currently unavailable because AI credits have run out. Please add credits to your Lovable workspace (Settings → Workspace → Usage) to continue chatting with me! 💪"
             : data.error,
         };
         setMessages((prev) => [...prev, errorMessage]);
@@ -54,7 +69,11 @@ export default function AICoach() {
       }
 
       if (!data?.message) {
-        toast.error('No response from AI coach');
+        const errorMessage: Message = {
+          role: 'assistant',
+          content: "Sorry, I couldn't generate a response. Please try again.",
+        };
+        setMessages((prev) => [...prev, errorMessage]);
         return;
       }
 
@@ -64,8 +83,17 @@ export default function AICoach() {
       };
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error: any) {
-      toast.error('Failed to get response from AI coach');
-      console.error(error);
+      console.error('AI Coach error:', error);
+      const errorString = error?.message || String(error);
+      const isCreditsError = errorString.includes('402') || errorString.includes('credits');
+      
+      const errorMessage: Message = {
+        role: 'assistant',
+        content: isCreditsError
+          ? "I'm currently unavailable because AI credits have run out. Please add credits to your Lovable workspace (Settings → Workspace → Usage) to continue chatting with me! 💪"
+          : "Sorry, something went wrong. Please try again later.",
+      };
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setLoading(false);
     }
