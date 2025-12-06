@@ -22,9 +22,16 @@ serve(async (req) => {
       );
     }
 
-    const prompt = `Realistic illustrated fitness image of a person performing ${exerciseName}. Dark neon gym background with blue-purple neon rim lighting, clean and clear form, instructional style, aesthetic fitness poster, high quality`;
+    if (!exerciseName) {
+      return new Response(
+        JSON.stringify({ error: 'Exercise name is required' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
-    console.log('Generating image for:', exerciseName);
+    const prompt = `Generate a realistic fitness illustration of a person demonstrating the "${exerciseName}" exercise with correct form. Show a fit person in athletic wear performing the exercise in a modern dark gym with subtle blue and purple neon accent lighting. The image should be clear, instructional, and inspiring. Clean composition, professional fitness photography style.`;
+
+    console.log('Generating AI image for exercise:', exerciseName);
 
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
@@ -52,7 +59,7 @@ serve(async (req) => {
       
       if (response.status === 402) {
         return new Response(
-          JSON.stringify({ error: 'Payment required, please add credits to Lovable AI' }),
+          JSON.stringify({ error: 'AI credits exhausted. Please add credits to your Lovable workspace.' }),
           { status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
@@ -64,20 +71,22 @@ serve(async (req) => {
     }
 
     const data = await response.json();
+    console.log('AI response received for:', exerciseName);
+    
     const imageUrl = data.choices?.[0]?.message?.images?.[0]?.image_url?.url;
 
     if (!imageUrl) {
-      console.error('No image URL in response:', data);
+      console.error('No image URL in response:', JSON.stringify(data).slice(0, 500));
       return new Response(
-        JSON.stringify({ error: 'Failed to generate image' }),
+        JSON.stringify({ error: 'Failed to generate image - no image in response' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    console.log('Image generated successfully for:', exerciseName);
+    console.log('Successfully generated AI image for:', exerciseName);
 
     return new Response(
-      JSON.stringify({ imageUrl }),
+      JSON.stringify({ imageUrl, exerciseName }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
