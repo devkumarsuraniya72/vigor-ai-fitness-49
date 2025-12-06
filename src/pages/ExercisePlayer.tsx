@@ -6,7 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/lib/auth';
 import { Play, Pause, SkipForward, SkipBack } from 'lucide-react';
 import { toast } from 'sonner';
-import { getExerciseImage } from '@/lib/exerciseImages';
+import { ExerciseImage } from '@/components/ExerciseImage';
 
 type WorkoutState = 'countdown' | 'exercise' | 'rest' | 'completed';
 
@@ -218,11 +218,9 @@ export default function ExercisePlayer() {
             >
               {/* Exercise Image */}
               <div className="mb-8 overflow-hidden rounded-3xl border-4 border-primary/30">
-                <img
-                  src={getExerciseImage(currentExercise.name)}
-                  alt={currentExercise.name}
-                  className="w-full h-96 object-cover"
-                  loading="eager"
+                <ExerciseImage 
+                  exerciseName={currentExercise.name}
+                  className="w-full h-96"
                 />
               </div>
 
