@@ -4,13 +4,24 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { supabase } from '@/integrations/supabase/client';
-import { Send, Bot, User } from 'lucide-react';
-import { toast } from 'sonner';
+import { Send, Bot, User, Sparkles } from 'lucide-react';
 
 type Message = {
   role: 'user' | 'assistant';
   content: string;
+  isFallback?: boolean;
 };
+
+interface AICoachResponse {
+  ok: boolean;
+  fallback: boolean;
+  code: number;
+  message: string;
+  data: {
+    response?: string;
+    error?: string;
+  };
+}
 
 export default function AICoach() {
   const [messages, setMessages] = useState<Message[]>([
@@ -36,62 +47,47 @@ export default function AICoach() {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('ai-coach', {
-        body: { messages: [...messages, userMessage] },
+      const { data, error } = await supabase.functions.invoke<AICoachResponse>('ai-coach', {
+        body: { messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content })) },
       });
 
-      // Handle edge function errors (including 402)
+      // Handle edge function invoke errors
       if (error) {
-        const errorString = error.message || String(error);
-        const isCreditsError = errorString.includes('402') || errorString.includes('credits') || errorString.includes('Payment');
-        
+        console.error('Edge function invoke error:', error);
+        // Provide a helpful fallback message
         const errorMessage: Message = {
           role: 'assistant',
-          content: isCreditsError
-            ? "I'm currently unavailable because AI credits have run out. Please add credits to your Lovable workspace (Settings → Workspace → Usage) to continue chatting with me! 💪"
-            : "Sorry, I'm having trouble connecting right now. Please try again later.",
+          content: "💪 Stay focused on your fitness journey! Remember: consistency beats intensity. I'm here to help whenever you need motivation!",
+          isFallback: true,
         };
         setMessages((prev) => [...prev, errorMessage]);
         return;
       }
 
-      // Handle application-level errors from the response
-      if (data?.error) {
-        const isCreditsError = data.error.includes('credits') || data.error.includes('Payment');
+      // The edge function ALWAYS returns ok: true with fallback info
+      if (data?.ok && data?.data?.response) {
+        const assistantMessage: Message = {
+          role: 'assistant',
+          content: data.data.response,
+          isFallback: data.fallback,
+        };
+        setMessages((prev) => [...prev, assistantMessage]);
+      } else {
+        // Unexpected response format
         const errorMessage: Message = {
           role: 'assistant',
-          content: isCreditsError
-            ? "I'm currently unavailable because AI credits have run out. Please add credits to your Lovable workspace (Settings → Workspace → Usage) to continue chatting with me! 💪"
-            : data.error,
+          content: "🔥 Keep pushing toward your goals! Every workout counts. Let me know if you have any questions!",
+          isFallback: true,
         };
         setMessages((prev) => [...prev, errorMessage]);
-        return;
       }
-
-      if (!data?.message) {
-        const errorMessage: Message = {
-          role: 'assistant',
-          content: "Sorry, I couldn't generate a response. Please try again.",
-        };
-        setMessages((prev) => [...prev, errorMessage]);
-        return;
-      }
-
-      const assistantMessage: Message = {
-        role: 'assistant',
-        content: data.message,
-      };
-      setMessages((prev) => [...prev, assistantMessage]);
-    } catch (error: any) {
+    } catch (error) {
       console.error('AI Coach error:', error);
-      const errorString = error?.message || String(error);
-      const isCreditsError = errorString.includes('402') || errorString.includes('credits');
-      
+      // Even on complete failure, show a helpful message
       const errorMessage: Message = {
         role: 'assistant',
-        content: isCreditsError
-          ? "I'm currently unavailable because AI credits have run out. Please add credits to your Lovable workspace (Settings → Workspace → Usage) to continue chatting with me! 💪"
-          : "Sorry, something went wrong. Please try again later.",
+        content: "⚡ Your determination is your superpower! Keep up the great work and stay committed to your fitness journey!",
+        isFallback: true,
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
@@ -134,13 +130,17 @@ export default function AICoach() {
                 >
                   {message.role === 'assistant' && (
                     <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary">
-                      <Bot className="h-6 w-6" />
+                      {message.isFallback ? (
+                        <Sparkles className="h-5 w-5" />
+                      ) : (
+                        <Bot className="h-6 w-6" />
+                      )}
                     </div>
                   )}
                   <div
                     className={`max-w-[80%] rounded-2xl px-6 py-4 ${
                       message.role === 'user'
-                        ? 'bg-gradient-to-r from-primary to-secondary text-background'
+                        ? 'bg-gradient-to-r from-primary to-secondary text-primary-foreground'
                         : 'border border-border bg-background/50'
                     }`}
                   >

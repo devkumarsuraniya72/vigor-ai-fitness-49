@@ -9,9 +9,10 @@ interface ExerciseImageProps {
 }
 
 export function ExerciseImage({ exerciseName, className }: ExerciseImageProps) {
-  const { imageUrl, isGenerating } = useExerciseImage(exerciseName);
+  const { imageUrl, isGenerating, isFallback } = useExerciseImage(exerciseName);
   const [imgError, setImgError] = useState(false);
 
+  // If image fails to load, use static fallback
   const displayUrl = imgError ? getExerciseImage(exerciseName) : imageUrl;
 
   return (
