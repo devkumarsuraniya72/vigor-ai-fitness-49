@@ -85,7 +85,19 @@ serve(async (req) => {
     }
 
     try {
-      const prompt = `Generate a realistic fitness illustration of a person demonstrating the "${exerciseName}" exercise with correct form. Show a fit person in athletic wear performing the exercise in a modern dark gym with subtle blue and purple neon accent lighting. The image should be clear, instructional, and inspiring. Clean composition, professional fitness photography style.`;
+      const prompt = `Generate a high-quality fitness illustration of a person performing the "${exerciseName}" exercise.
+
+Follow these rules strictly:
+1. The image must clearly show a person performing the EXACT "${exerciseName}" exercise with correct and realistic form.
+2. The exercise shown MUST EXACTLY match "${exerciseName}" - no mismatch allowed.
+3. Use a clean gym background with modern equipment, realistic body proportions, and smooth professional lighting.
+4. Show the full body unless the exercise naturally focuses on a specific body part.
+5. Style: Professional fitness-instructor quality - clean, sharp, and instructional.
+6. Do NOT add extra equipment unless "${exerciseName}" specifically requires it.
+7. Show only ONE person in the image.
+8. The person should wear standard gym clothing (athletic wear, fitted t-shirt or tank top, shorts or leggings).
+9. The pose should be at the peak/most recognizable moment of the "${exerciseName}" exercise.
+10. Lighting should be bright and even to clearly show muscle engagement and form.`;
 
       console.log('Attempting AI image generation for:', exerciseName);
 
@@ -96,7 +108,7 @@ serve(async (req) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'google/gemini-2.5-flash-image',
+          model: 'google/gemini-2.5-flash-image-preview',
           messages: [{ role: 'user', content: prompt }],
           modalities: ['image', 'text'],
         }),
