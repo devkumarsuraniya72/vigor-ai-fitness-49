@@ -18,342 +18,270 @@ interface KnowledgeEntry {
 const fitnessKnowledge: KnowledgeEntry[] = [
   {
     keywords: ['water', 'hydration', 'drink', 'fluid', 'hydrate'],
-    answer: `💧 **Daily Water Intake Recommendation:**
-
-• **Men:** 3.7 liters (about 13 cups) per day
-• **Women:** 2.7 liters (about 9 cups) per day
-
-**Tips:**
-- Drink an extra 500ml for every 30 minutes of exercise
-- If you're sweating heavily, add electrolytes
-- Check urine color: pale yellow = well hydrated
-- Drink a glass of water first thing in the morning
-- Carry a water bottle throughout the day`
+    answer: `💧 **Daily Water Intake:**
+• Men: 3.7L (13 cups) per day
+• Women: 2.7L (9 cups) per day
+• Add 500ml for every 30 min of exercise
+• Check urine color: pale yellow = well hydrated`
   },
   {
     keywords: ['protein', 'how much protein', 'protein intake', 'protein requirement'],
-    answer: `🥩 **Daily Protein Intake Recommendation:**
-
-• **General fitness:** 1.2–1.6g per kg body weight
-• **Muscle building:** 1.6–2.2g per kg body weight
-• **Athletes:** 1.8–2.5g per kg body weight
-
-**Example (70kg person):**
-- Maintenance: 84–112g protein/day
-- Muscle building: 112–154g protein/day
-
-**Best protein sources:**
-- Chicken breast, fish, eggs, Greek yogurt
-- Legumes, tofu, tempeh for plant-based
-- Spread intake across 4-5 meals for optimal absorption`
+    answer: `🥩 **Protein Intake:**
+• General fitness: 1.2–1.6g per kg body weight
+• Muscle building: 1.6–2.2g per kg body weight
+• Example (70kg): 112–154g protein/day for muscle gain
+• Best sources: chicken, fish, eggs, Greek yogurt, legumes`
   },
   {
-    keywords: ['calorie', 'calories', 'how many calories', 'caloric intake', 'tdee'],
-    answer: `🔥 **Daily Calorie Intake Guide:**
-
-**Estimation formula (rough):**
-• Sedentary: Body weight (kg) × 25-28 kcal
-• Moderately active: Body weight (kg) × 30-33 kcal
-• Very active: Body weight (kg) × 35-40 kcal
-
-**Goals:**
-- **Weight loss:** Eat 300-500 kcal below maintenance
-- **Muscle gain:** Eat 200-400 kcal above maintenance
-- **Maintenance:** Match your TDEE
-
-**Tips:**
-- Track food for 1-2 weeks to understand your intake
-- Focus on nutrient-dense foods, not just calories
-- Protein and fiber help you feel fuller longer`
+    keywords: ['fat loss', 'lose fat', 'burn fat', 'belly fat', 'lose belly'],
+    answer: `🔥 **Best Exercises for Fat Loss:**
+• HIIT (High Intensity Interval Training)
+• Strength training 3-4x/week
+• Walking 10,000 steps daily
+• Compound lifts: squats, deadlifts, rows
+• Note: You cannot spot-reduce belly fat. Overall fat loss through calorie deficit + exercise is the key.`
+  },
+  {
+    keywords: ['muscle gain', 'build muscle', 'gain muscle', 'hypertrophy', 'muscle building'],
+    answer: `💪 **Best Exercises for Muscle Gain:**
+• Compound movements: squats, deadlifts, bench press, rows, overhead press
+• 8-12 reps per set, 3-4 sets
+• Progressive overload: add weight/reps weekly
+• Calorie surplus: +200-400 kcal/day
+• Protein: 1.6-2.2g per kg body weight`
+  },
+  {
+    keywords: ['sets', 'reps', 'how many sets', 'how many reps', 'repetitions'],
+    answer: `📊 **Sets and Reps Guide:**
+• Strength: 3-5 sets × 4-6 reps (heavy weight)
+• Hypertrophy: 3-4 sets × 8-12 reps (moderate weight)
+• Endurance: 2-3 sets × 15-20 reps (light weight)
+• Beginners: Start with 3 sets × 10 reps`
   },
   {
     keywords: ['rest', 'rest time', 'rest between sets', 'how long to rest', 'recovery between sets'],
     answer: `⏱️ **Rest Time Between Sets:**
-
-• **Strength training (heavy weight):** 2–3 minutes
-• **Hypertrophy (muscle building):** 60–90 seconds
-• **Endurance training:** 30–60 seconds
-• **Power/explosive exercises:** 3–5 minutes
-
-**Why it matters:**
-- Longer rest = more strength recovery for heavy lifts
-- Shorter rest = more metabolic stress for muscle growth
-- Match rest time to your training goal
-
-**Tip:** Use rest time for light mobility or core activation`
+• Strength (heavy): 2–3 minutes
+• Hypertrophy (muscle building): 60–90 seconds
+• Endurance: 30–60 seconds
+• Power/explosive: 3–5 minutes`
   },
   {
-    keywords: ['warm up', 'warmup', 'before workout', 'pre workout', 'warming up'],
-    answer: `🔥 **Warm-Up Guidelines:**
-
-**Duration:** 5–10 minutes before every workout
-
-**Structure:**
-1. **Light cardio (3-5 min):** Walking, jogging, cycling
-2. **Dynamic stretches (3-5 min):** Leg swings, arm circles, hip rotations
-3. **Activation exercises:** Light versions of workout movements
-
-**Benefits:**
-- Increases blood flow to muscles
-- Improves joint mobility
-- Reduces injury risk by 50%+
-- Enhances performance
-
-**Never skip warm-up for heavy lifting or intense cardio!**`
-  },
-  {
-    keywords: ['stretch', 'stretching', 'flexibility', 'cool down', 'after workout'],
-    answer: `🧘 **Stretching Guidelines:**
-
-**After workout (static stretching):**
-- Hold each stretch 30-60 seconds
-- Focus on muscles you just trained
-- Breathe deeply, don't bounce
-
-**Key stretches:**
-- Hamstring stretch, quad stretch
-- Hip flexor stretch, chest stretch
-- Shoulder stretch, calf stretch
-
-**Benefits:**
-- Improves flexibility and range of motion
-- Reduces muscle soreness (DOMS)
-- Promotes relaxation and recovery
-
-**Tip:** Stretch while muscles are warm, not cold`
-  },
-  {
-    keywords: ['cardio', 'strength', 'cardio vs strength', 'which is better', 'cardio or weights'],
-    answer: `🏃‍♂️ **Cardio vs Strength Training:**
-
-**Both are important! Here's the breakdown:**
-
-**Cardio benefits:**
-- Burns calories during exercise
-- Improves heart health
-- Builds endurance
-- Reduces stress
-
-**Strength training benefits:**
-- Builds muscle, boosts metabolism
-- Burns calories even at rest
-- Strengthens bones and joints
-- Improves posture
-
-**Ideal approach:**
-- 2-4 strength sessions per week
-- 2-3 cardio sessions per week
-- For fat loss: prioritize strength + moderate cardio
-- Do strength before cardio if same session`
+    keywords: ['calorie', 'calories', 'how many calories', 'calories to lose', 'calorie deficit'],
+    answer: `🔥 **Calories for Weight Loss:**
+• Calculate TDEE (Total Daily Energy Expenditure)
+• Create deficit of 300-500 kcal/day
+• 0.5-1kg loss per week is healthy
+• Never go below 1200 kcal (women) or 1500 kcal (men)
+• Track food intake for accuracy`
   },
   {
     keywords: ['beginner', 'start', 'new to gym', 'workout plan', 'first time', 'starting out'],
-    answer: `🌟 **Beginner Workout Plan:**
-
-**Week structure (3 days):**
-
-**Day 1 - Full Body:**
-- Squats: 3×10
-- Push-ups: 3×8-10
-- Dumbbell rows: 3×10
-- Plank: 3×30 sec
-
-**Day 2 - Cardio + Core:**
-- 20-30 min walking/cycling
-- Crunches: 3×15
-- Bird dogs: 3×10
-
-**Day 3 - Full Body:**
-- Lunges: 3×10 each leg
-- Dumbbell press: 3×10
-- Lat pulldowns: 3×10
-- Glute bridges: 3×12
-
-**Tips for beginners:**
-- Focus on form over weight
-- Start light, progress slowly
-- Rest 1-2 days between strength sessions
-- Stay consistent for 4-6 weeks`
+    answer: `🌟 **Beginner Workout Plan (3 days/week):**
+**Day 1:** Squats 3×10, Push-ups 3×10, Rows 3×10, Plank 3×30s
+**Day 2:** 20-30 min cardio + core work
+**Day 3:** Lunges 3×10, Dumbbell press 3×10, Lat pulldown 3×10
+• Focus on form over weight
+• Progress slowly over 4-6 weeks`
   },
   {
-    keywords: ['fat loss', 'weight loss', 'lose weight', 'burn fat', 'losing fat'],
-    answer: `⚖️ **Fat Loss vs Weight Loss:**
-
-**Key difference:**
-- **Weight loss:** Losing total body weight (water, muscle, fat)
-- **Fat loss:** Losing body fat while preserving muscle
-
-**How to lose fat effectively:**
-1. Calorie deficit: 300-500 kcal below maintenance
-2. High protein: 1.6-2.0g per kg body weight
-3. Strength training: 3-4x per week
-4. Cardio: 2-3x per week (moderate)
-5. Sleep: 7-9 hours per night
-6. Patience: 0.5-1kg per week is healthy
-
-**Avoid:**
-- Extreme diets (under 1200 kcal)
-- Only doing cardio
-- Skipping meals`
+    keywords: ['best time', 'when to workout', 'morning workout', 'evening workout', 'workout timing'],
+    answer: `🕐 **Best Time to Workout:**
+• Morning: Higher testosterone, better fat burning, establishes routine
+• Afternoon (2-6pm): Peak performance, body temperature optimal
+• Evening: Good strength, but may affect sleep
+• Best time = whenever you can be consistent!`
+  },
+  {
+    keywords: ['intermittent fasting', 'fasting', 'if diet', '16:8'],
+    answer: `⏰ **Intermittent Fasting:**
+• 16:8 method: 16 hours fasting, 8 hours eating window
+• Can help with calorie control and fat loss
+• Not magic—still need calorie deficit for weight loss
+• Safe for most healthy adults
+• Stay hydrated during fasting periods`
   },
   {
     keywords: ['steps', 'walking', 'how many steps', '10000 steps', 'daily steps'],
-    answer: `👟 **Daily Step Goal:**
-
-**Recommendations:**
-- **Minimum:** 7,000 steps/day (reduces mortality risk)
-- **Optimal:** 8,000-10,000 steps/day
-- **Very active:** 12,000+ steps/day
-
-**Benefits:**
-- Burns 300-500 extra calories
-- Improves cardiovascular health
-- Reduces stress and anxiety
-- Easy to maintain long-term
-
-**How to increase steps:**
-- Take stairs instead of elevator
-- Walk during phone calls
-- Park farther from entrance
-- Take a 10-min walk after meals`
+    answer: `👟 **Daily Steps Goal:**
+• Minimum: 7,000 steps/day
+• Optimal: 8,000-10,000 steps/day
+• Burns 300-500 extra calories
+• Improves cardiovascular health and reduces stress`
   },
   {
-    keywords: ['how long', 'workout duration', 'workout length', 'how long to workout', 'exercise duration'],
-    answer: `⏰ **Optimal Workout Duration:**
-
-**Recommendations:**
-- **Beginners:** 30-45 minutes
-- **Intermediate:** 45-60 minutes
-- **Advanced:** 60-75 minutes
-
-**What counts:**
-- This is actual training time
-- Don't count rest periods or socializing
-- Quality > quantity
-
-**Key points:**
-- Workouts over 90 min may increase cortisol
-- Short, intense workouts can be very effective
-- Consistency matters more than duration
-
-**Frequency:**
-- 3-5 days per week for most goals
-- Allow 48 hours rest for same muscle groups`
+    keywords: ['sleep', 'how much sleep', 'sleeping', 'rest recovery'],
+    answer: `😴 **Sleep for Fitness:**
+• Adults: 7-9 hours per night
+• Athletes: 8-10 hours
+• Sleep deprivation reduces strength by 10-20%
+• Muscle recovery and growth hormone release happen during deep sleep`
+  },
+  {
+    keywords: ['cardio', 'strength', 'cardio vs strength', 'which is better', 'cardio or weights'],
+    answer: `🏃‍♂️ **Cardio vs Strength:**
+• Both are important!
+• Fat loss: Prioritize strength + moderate cardio
+• Strength builds muscle, boosts metabolism
+• Cardio improves heart health and endurance
+• Ideal: 2-4 strength + 2-3 cardio sessions/week`
+  },
+  {
+    keywords: ['how long', 'workout duration', 'workout length', 'how long to workout'],
+    answer: `⏰ **Workout Duration:**
+• Beginners: 30-45 minutes
+• Intermediate: 45-60 minutes
+• Advanced: 60-75 minutes
+• Quality > quantity
+• Workouts over 90 min may increase cortisol`
+  },
+  {
+    keywords: ['diet weight loss', 'best diet', 'diet for losing', 'weight loss diet'],
+    answer: `🥗 **Best Diet for Weight Loss:**
+• Calorie deficit: 300-500 kcal below maintenance
+• High protein: 1.6-2g per kg body weight
+• Plenty of vegetables and fiber
+• Limit processed foods and sugary drinks
+• No extreme diets—sustainability is key`
+  },
+  {
+    keywords: ['diet muscle', 'muscle diet', 'bulking diet', 'gain diet'],
+    answer: `🍗 **Best Diet for Muscle Gain:**
+• Calorie surplus: +200-400 kcal/day
+• Protein: 1.6-2.2g per kg body weight
+• Carbs around workouts for energy
+• Eat 4-5 meals spread throughout day
+• Prioritize whole foods over supplements`
+  },
+  {
+    keywords: ['warm up', 'warmup', 'warming up', 'pre workout stretch'],
+    answer: `🔥 **Warm-Up Routine (5-10 min):**
+1. Light cardio: 3-5 min (jogging, jumping jacks)
+2. Dynamic stretches: leg swings, arm circles, hip rotations
+3. Activation: light versions of workout movements
+• Reduces injury risk by 50%+
+• Never skip before heavy lifting!`
+  },
+  {
+    keywords: ['cool down', 'cooldown', 'after workout', 'post workout'],
+    answer: `🧊 **Cool-Down Routine (5-10 min):**
+1. Light walking or cycling: 3-5 min
+2. Static stretches: hold each 30-60 seconds
+3. Focus on muscles trained
+• Reduces muscle soreness
+• Promotes recovery and relaxation`
+  },
+  {
+    keywords: ['creatine', 'creatine safe', 'should i take creatine'],
+    answer: `💊 **Creatine:**
+• One of the most researched supplements—proven safe
+• 3-5g per day (no loading phase needed)
+• Improves strength, power, and muscle gain
+• Stay well hydrated
+• Safe for long-term use in healthy adults`
+  },
+  {
+    keywords: ['supplement', 'supplements', 'should i take', 'do i need supplements'],
+    answer: `💊 **Supplements Guide:**
+• Most people don't need supplements if diet is good
+• Useful basics: Protein powder (convenience), Creatine (proven), Vitamin D (if deficient)
+• Pre-workout: optional, contains caffeine
+• Focus on whole foods first, supplements second`
+  },
+  {
+    keywords: ['eat before workout', 'pre workout meal', 'what to eat before'],
+    answer: `🍌 **Pre-Workout Nutrition:**
+• 2-3 hours before: balanced meal (protein + carbs + fats)
+• 30-60 min before: light snack (banana, toast, yogurt)
+• Carbs for energy, protein for muscle
+• Avoid high-fat foods close to workout`
+  },
+  {
+    keywords: ['eat after workout', 'post workout meal', 'what to eat after'],
+    answer: `🥤 **Post-Workout Nutrition:**
+• Eat within 30-60 minutes after workout
+• Protein: 20-40g for muscle repair
+• Carbs: replenish glycogen stores
+• Examples: chicken + rice, protein shake + banana, eggs + toast`
+  },
+  {
+    keywords: ['stamina', 'endurance', 'increase stamina', 'cardio endurance'],
+    answer: `🏃 **How to Increase Stamina:**
+• Start with Zone 2 cardio: 30-45 min at conversational pace
+• Add HIIT 1-2x/week
+• Gradually increase duration/intensity
+• Consistency is key—train 3-4x/week
+• Allow adequate recovery between sessions`
+  },
+  {
+    keywords: ['flexibility', 'improve flexibility', 'stretch routine', 'mobility'],
+    answer: `🧘 **How to Improve Flexibility:**
+• Stretch daily, especially after workouts
+• Hold static stretches 30-60 seconds
+• Include yoga or mobility work 2-3x/week
+• Focus on hip flexors, hamstrings, shoulders
+• Never stretch cold muscles—warm up first`
+  },
+  {
+    keywords: ['not losing weight', 'plateau', 'stuck', 'why not losing'],
+    answer: `⚖️ **Why You're Not Losing Weight:**
+• Hidden calories: check portions, sauces, drinks
+• Underestimating intake or overestimating burn
+• Metabolic adaptation: reduce calories further or increase activity
+• Stress/sleep affecting hormones
+• Building muscle while losing fat (scale doesn't show progress)`
+  },
+  {
+    keywords: ['how long results', 'when see results', 'timeline', 'how long to see'],
+    answer: `📅 **Timeline to See Results:**
+• Strength gains: 2-4 weeks
+• Visible muscle: 6-12 weeks
+• Fat loss (noticeable): 4-8 weeks
+• Major transformation: 3-6 months
+• Consistency and patience are essential!`
+  },
+  {
+    keywords: ['motivation', 'stay motivated', 'how to motivate', 'discipline'],
+    answer: `🎯 **How to Stay Motivated:**
+• Set specific, measurable goals
+• Track progress (photos, measurements, lifts)
+• Find a workout partner or community
+• Schedule workouts like appointments
+• Remember: discipline > motivation. Show up even on hard days.`
+  },
+  {
+    keywords: ['doms', 'muscle soreness', 'sore muscles', 'soreness', 'delayed onset'],
+    answer: `💆 **DOMS (Delayed Onset Muscle Soreness):**
+• Normal after new or intense exercise
+• Peaks 24-72 hours after workout
+• Light movement helps recovery (active recovery)
+• Stay hydrated, sleep well, get protein
+• Reduce with proper warm-up and gradual progression`
   },
   {
     keywords: ['diet', 'meal plan', 'eating', 'nutrition', 'what to eat', 'healthy eating'],
-    answer: `🥗 **Basic Diet Plan Guidelines:**
-
-**Plate composition (per meal):**
-- 1/2 plate: Vegetables and fruits
-- 1/4 plate: Lean protein
-- 1/4 plate: Complex carbs
-- Add healthy fats (olive oil, nuts)
-
-**Meal timing:**
-- Eat every 3-4 hours
-- Protein with every meal
-- Carbs around workouts
-- Don't skip breakfast
-
-**Foods to prioritize:**
-- Lean meats, fish, eggs
-- Vegetables, fruits, legumes
-- Whole grains, oats, rice
-- Nuts, seeds, avocados
-
-**Foods to limit:**
-- Processed foods, sugary drinks
-- Fried foods, excessive alcohol`
-  },
-  {
-    keywords: ['sleep', 'rest', 'recovery', 'how much sleep', 'sleeping'],
-    answer: `😴 **Sleep Requirements for Fitness:**
-
-**Recommendations:**
-- **Adults:** 7-9 hours per night
-- **Athletes:** 8-10 hours per night
-- **Naps:** 20-30 min if needed
-
-**Why sleep matters:**
-- Muscle recovery happens during sleep
-- Growth hormone release peaks during deep sleep
-- Poor sleep increases cortisol (stores fat)
-- Sleep deprivation reduces strength by 10-20%
-
-**Sleep tips:**
-- Same bedtime every night
-- No screens 1 hour before bed
-- Cool, dark room
-- Avoid caffeine after 2pm
-- Limit alcohol before bed`
+    answer: `🥗 **Basic Nutrition Guidelines:**
+• 1/2 plate: vegetables and fruits
+• 1/4 plate: lean protein
+• 1/4 plate: complex carbs
+• Add healthy fats (olive oil, nuts, avocado)
+• Protein with every meal`
   },
   {
     keywords: ['exercise', 'best exercise', 'most effective', 'which exercise', 'top exercises'],
-    answer: `💪 **Best Exercises for Overall Fitness:**
-
-**Compound movements (work multiple muscles):**
-1. **Squats** - Legs, core, back
-2. **Deadlifts** - Full posterior chain
-3. **Bench Press** - Chest, shoulders, triceps
-4. **Pull-ups/Rows** - Back, biceps
-5. **Overhead Press** - Shoulders, core
-
-**Bodyweight essentials:**
-- Push-ups, lunges, planks
-- Burpees, mountain climbers
-
-**Cardio options:**
-- Running, cycling, swimming
-- Jump rope, rowing
-
-**Key principle:** The best exercise is one you'll do consistently!`
+    answer: `💪 **Best Overall Exercises:**
+• Squats, Deadlifts, Bench Press, Rows, Overhead Press
+• Bodyweight: push-ups, pull-ups, lunges, planks
+• The best exercise is one you'll do consistently!`
   },
   {
-    keywords: ['muscle', 'build muscle', 'muscle building', 'gain muscle', 'hypertrophy'],
-    answer: `💪 **Muscle Building Guidelines:**
-
-**Training:**
-- 3-5 strength sessions per week
-- 8-12 reps per set for hypertrophy
-- 3-4 sets per exercise
-- Progressive overload (add weight/reps weekly)
-
-**Nutrition:**
-- Calorie surplus: +200-400 kcal/day
-- Protein: 1.6-2.2g per kg body weight
-- Spread protein across 4-5 meals
-- Carbs for energy, especially around workouts
-
-**Recovery:**
-- 48 hours rest per muscle group
-- 7-9 hours sleep
-- Manage stress
-- Stay hydrated
-
-**Timeline:** Expect 0.25-0.5kg muscle gain per month (natural)`
-  },
-  {
-    keywords: ['frequency', 'how often', 'times per week', 'workout frequency', 'training frequency'],
-    answer: `📅 **Workout Frequency Recommendations:**
-
-**By goal:**
-- **General fitness:** 3-4 days/week
-- **Muscle building:** 4-5 days/week
-- **Fat loss:** 4-5 days/week (mix of strength + cardio)
-- **Maintenance:** 2-3 days/week
-
-**Split options:**
-- **Full body:** 3x/week
-- **Upper/Lower:** 4x/week
-- **Push/Pull/Legs:** 5-6x/week
-
-**Key rules:**
-- Rest each muscle group 48 hours
-- Quality over quantity
-- Listen to your body
-- Consistency > intensity`
-  },
+    keywords: ['frequency', 'how often', 'times per week', 'workout frequency'],
+    answer: `📅 **Workout Frequency:**
+• General fitness: 3-4 days/week
+• Muscle building: 4-5 days/week
+• Fat loss: 4-5 days/week (strength + cardio mix)
+• Rest each muscle group 48 hours`
+  }
 ];
 
 // Motivational fallback responses for unknown questions
